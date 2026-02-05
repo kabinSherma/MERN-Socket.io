@@ -55,6 +55,7 @@ io.on("connection",(socket)=>{
 
   socket.on("getBook", async()=>{
     try {
+        const {bookId,bookName,bookPrice}=data
         const books = await Book.find()
         socket.emit("Response",{status:200, message:"Book fetched Sucessfully",data:books})
 
@@ -69,6 +70,7 @@ io.on("connection",(socket)=>{
   socket.on("updateBook",async(data)=>{
     try {
         if(data){
+            const {bookId}=data
             const updatedBook = await Book.findByIdAndUpdate(bookId,{
                 bookName,
                 bookPrice
